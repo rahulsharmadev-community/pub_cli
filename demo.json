@@ -1,0 +1,33 @@
+{
+  "name": "BMI_interface",
+  "description": "A new Flutter project.",
+  "version": "1.0.0+1",
+  "environment": { "sdk": ">=2.7.0 <3.0.0" },
+  "dependencies": {
+    "flutter": { "sdk": "flutter" },
+    "cupertino_icons": "^1.0.0"
+  },
+  "dev_dependencies": { "flutter_test": { "sdk": "flutter" } },
+  "flutter": {
+    "uses-material-design": true,
+    "assets": ["assets/"],
+    "fonts": [
+      {
+        "family": "American",
+        "fonts": [{ "asset": "assets/fonts/AmericanSigns.otf" }]
+      },
+      {
+        "family": "Valeria",
+        "fonts": [{ "asset": "assets/fonts/Valeria_normal.ttf" }]
+      },
+      {
+        "family": "Shakerato",
+        "fonts": [
+          { "asset": "assets/fonts/Shakerato.otf" },
+          { "asset": "assets/fonts/Shakerato-Bold.otf" }
+        ]
+      },
+      { "family": "cream", "fonts": [{ "asset": "assets/fonts/cream.otf" }] }
+    ]
+  }
+}

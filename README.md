@@ -1,2 +1,2 @@
-# pub_cli
- PUB CLI Tool is help to setup you new flutter project
+A sample command-line application with an entrypoint in `bin/`, library code
+in `lib/`, and example unit test in `test/`.
