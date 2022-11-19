@@ -10,9 +10,8 @@ const _firebase = [
   'firebase_storage',
 ];
 void main(List<String> arg) {
-  print(arg);
   if (arg.isEmpty) return;
-  if (arg[0] == 'load' && arg[1] == '-firebase') arg = _firebase;
+  if (arg.length == 2 && arg[1] == '-firebase') arg = _firebase;
   return arg.length == 1
       ? mainCommandHandler(arg.first)
       : mulitImportHandler(arg);

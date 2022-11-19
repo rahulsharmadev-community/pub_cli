@@ -73,8 +73,8 @@ class Pubspec {
       name: 'New Project',
       description: 'A Very Good Project created by Pub CLI',
       version: '1.0.0',
-      homepage: '',
-      documentation: '',
+      homepage: 'homepage',
+      documentation: 'documentation',
       environmentSDK: '>=2.18.4 <3.0.0',
       dependencies: ['flutter_bloc', 'equatable', 'bloc_test', 'jars', 'http'],
       devDependencies: ['lints']);
