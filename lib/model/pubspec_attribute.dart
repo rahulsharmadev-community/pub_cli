@@ -62,8 +62,8 @@ class Pubspec {
         "name": name,
         "description": description,
         "version": version,
-        if (homepage.isNotEmpty) "homepage": homepage,
-        if (documentation.isNotEmpty) "documentation": documentation,
+        "homepage": homepage,
+        "documentation": documentation,
         "environmentSDK": environmentSDK,
         "dependencies": List<dynamic>.from(dependencies.map((x) => x)),
         "dev_dependencies": List<dynamic>.from(devDependencies.map((x) => x))
@@ -76,6 +76,6 @@ class Pubspec {
       homepage: '',
       documentation: '',
       environmentSDK: '>=2.18.4 <3.0.0',
-      dependencies: ['flutter_bloc', 'bloc_test', 'jars', 'http'],
+      dependencies: ['flutter_bloc', 'equatable', 'bloc_test', 'jars', 'http'],
       devDependencies: ['lints']);
 }

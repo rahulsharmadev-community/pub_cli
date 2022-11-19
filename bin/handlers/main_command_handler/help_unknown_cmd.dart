@@ -3,10 +3,11 @@ import 'dart:io';
 void onHelpCmd() {
   var text = '''
 Available commands:
-  run      Analyze Dart code in a directory.
-  setup    Compile Dart to various formats.
-  help     For more information about a commands.
-  cc       See License\n
+  load             Load default flutter packages in pubspec file.
+    -firebase      Load firebase default in pubspec file.
+  setup            Create your own default packages in temp folder.
+  help             For more information about a commands.
+  cc               See License\n
 ''';
   stdout.write(text);
 }

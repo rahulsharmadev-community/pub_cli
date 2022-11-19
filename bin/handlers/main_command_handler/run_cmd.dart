@@ -1,11 +1,10 @@
-import 'package:pub_cli/pub_cli.dart';
-import 'package:pub_cli/repos/repos.dart';
-import '../../pub_cli.dart';
+import 'package:pub_cli/pubspace_yaml.dart';
 
 void onRunCmd() async {
-  var pub = PubspaceYaml(
-      yamlRequestRepo: YamlRequestRepo('test'),
-      dependencies: dependencies,
-      devDependencies: devDependencies);
-  pub.createNew();
+  var cached = await PubspaceYaml.getCachedPubspec;
+
+  PubspaceYaml(
+          dependencies: cached.dependencies,
+          devDependencies: cached.devDependencies)
+      .createOrEdit();
 }

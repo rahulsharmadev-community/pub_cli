@@ -1,20 +1,26 @@
 import 'enums.dart';
 import 'handlers/_handler.dart';
 
-const cachedFile = '__pubcli_cache_data';
-var dependencies = ['flutter_bloc', 'bloc_test', 'jars', 'http'];
-var devDependencies = ['lints'];
-
-void main(List<String> arguments) {
-  if (arguments.isEmpty) return;
-  arguments.length == 1
-      ? mainCommandHandler(arguments)
-      : mulitImportHandler(arguments);
+const _firebase = [
+  'google_sign_in',
+  'firebase_core',
+  'firebase_auth',
+  'cloud_firestore',
+  'firebase_messaging',
+  'firebase_storage',
+];
+void main(List<String> arg) {
+  print(arg);
+  if (arg.isEmpty) return;
+  if (arg[0] == 'load' && arg[1] == '-firebase') arg = _firebase;
+  return arg.length == 1
+      ? mainCommandHandler(arg.first)
+      : mulitImportHandler(arg);
 }
 
-void mainCommandHandler(List<String> arguments) {
-  switch (MainCommand.getBy(arguments.first)) {
-    case MainCommand.run:
+void mainCommandHandler(String arguments) {
+  switch (MainCommand.getBy(arguments)) {
+    case MainCommand.load:
       return onRunCmd();
     case MainCommand.setup:
       return onSetupCmd();
@@ -23,6 +29,6 @@ void mainCommandHandler(List<String> arguments) {
     case MainCommand.help:
       return onHelpCmd();
     default:
-      return onUnknownCmd(arguments.first);
+      return onUnknownCmd(arguments);
   }
 }

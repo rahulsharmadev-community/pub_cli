@@ -1,5 +1,5 @@
 enum MainCommand {
-  run,
+  load,
   setup,
   cc,
   help,

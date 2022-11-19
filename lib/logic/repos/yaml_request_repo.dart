@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:json2yaml/json2yaml.dart';
 import 'package:yaml/yaml.dart';
-import 'directory_request.dart';
+import '../core_request/directory_request.dart';
 
 class YamlRequestRepo with DirectoryRequest {
   final String filePath;

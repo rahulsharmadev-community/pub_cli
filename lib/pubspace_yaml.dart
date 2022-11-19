@@ -1,8 +1,6 @@
 import 'package:pub_cli/model/pubspec_attribute.dart';
-import 'package:pub_cli/repos/default_cached_repo.dart';
-
 import '_extension.dart';
-import 'package:pub_cli/repos/repos.dart';
+import 'package:pub_cli/logic/repos.dart';
 
 class PubspaceYaml with PubDevHttpRequest {
   final YamlRequestRepo yamlRepo;
@@ -11,31 +9,35 @@ class PubspaceYaml with PubDevHttpRequest {
       {this.dependencies = const [],
       this.devDependencies = const [],
       YamlRequestRepo? yamlRequestRepo})
-      : yamlRepo = yamlRequestRepo ?? YamlRequestRepo('test');
+      : yamlRepo = yamlRequestRepo ?? YamlRequestRepo('pubspec');
 
-  createNew() async {
+  static Future<Pubspec> get getCachedPubspec async =>
+      CachedRepo().getPubspecData;
+  static Future<void> editCachedPubspec(Pubspec data) async =>
+      await CachedRepo().setPubspecData(data);
+
+  Future<void> createOrEdit() async {
     late Map<String, dynamic> afterEdit;
+    var cachedJson = await CachedRepo().getPubspecData;
+    Map<String, dynamic>? ed, edd, eot;
     if (await yamlRepo.isFileExistInCurrent) {
       var existingJson = await yamlRepo.getJson;
-      afterEdit = await convetToYamlJson(
-          Pubspec.kdefault.copyWith(
-              name: existingJson['name'],
-              description: existingJson['description'],
-              version: existingJson['version'],
-              homepage: existingJson['homepage'],
-              documentation: existingJson['documentation'],
-              environmentSDK: existingJson['environment'] != null
-                  ? Map.from(existingJson['environment'])['sdk']
-                  : null,
-              dependencies: dependencies,
-              devDependencies: devDependencies),
-          existingJson['dependencies'],
-          existingJson['dev_dependencies'],
-          existingJson['flutter']);
-    } else {
-      var cachedJson = await DefaultCachedData().getPubspecData;
-      afterEdit = await convetToYamlJson(cachedJson);
+      cachedJson = cachedJson.copyWith(
+          name: existingJson['name'],
+          description: existingJson['description'],
+          version: existingJson['version'],
+          homepage: existingJson['homepage'],
+          documentation: existingJson['documentation'],
+          environmentSDK: existingJson['environment'] != null
+              ? Map.from(existingJson['environment'])['sdk']
+              : null,
+          dependencies: dependencies,
+          devDependencies: devDependencies);
+      ed = existingJson['dependencies'];
+      edd = existingJson['dev_dependencies'];
+      eot = existingJson['flutter'];
     }
+    afterEdit = await convetToYamlJson(cachedJson, ed, edd, eot);
     await yamlRepo.setJson(afterEdit);
   }
 
